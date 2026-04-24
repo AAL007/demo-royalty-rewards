@@ -64,35 +64,35 @@ export default function CartPage() {
       <div className="rounded-2xl border bg-card shadow-card overflow-hidden">
         {items.map((item, idx) => (
           <div key={item.menuItemId}>
-            <div className="flex items-center gap-4 px-5 py-4">
-              <span className="text-2xl shrink-0">{item.icon}</span>
+            <div className="flex items-center gap-2 px-3 py-3">
+              <span className="text-xl shrink-0">{item.icon}</span>
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-sm">{item.name}</p>
+                <p className="font-medium text-sm truncate">{item.name}</p>
                 <p className="text-xs text-muted-foreground">${item.price.toFixed(2)} each</p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <button
                   onClick={() => updateQty(item.menuItemId, item.quantity - 1)}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border bg-background hover:bg-muted transition-colors"
+                  className="flex h-6 w-6 items-center justify-center rounded-full border bg-background hover:bg-muted transition-colors"
                 >
-                  <Minus className="h-3 w-3" />
+                  <Minus className="h-2.5 w-2.5" />
                 </button>
-                <span className="w-5 text-center text-sm font-semibold">{item.quantity}</span>
+                <span className="w-4 text-center text-sm font-semibold">{item.quantity}</span>
                 <button
                   onClick={() => updateQty(item.menuItemId, item.quantity + 1)}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border bg-background hover:bg-muted transition-colors"
+                  className="flex h-6 w-6 items-center justify-center rounded-full border bg-background hover:bg-muted transition-colors"
                 >
-                  <Plus className="h-3 w-3" />
+                  <Plus className="h-2.5 w-2.5" />
                 </button>
               </div>
-              <span className="w-16 text-right font-semibold text-sm shrink-0">
+              <span className="w-14 text-right font-semibold text-sm shrink-0">
                 ${(item.price * item.quantity).toFixed(2)}
               </span>
               <button
                 onClick={() => removeItem(item.menuItemId)}
-                className="shrink-0 text-muted-foreground hover:text-destructive transition-colors ml-1"
+                className="shrink-0 text-muted-foreground hover:text-destructive transition-colors"
               >
-                <Trash2 className="h-4 w-4" />
+                <Trash2 className="h-3.5 w-3.5" />
               </button>
             </div>
             {idx < items.length - 1 && <Separator />}

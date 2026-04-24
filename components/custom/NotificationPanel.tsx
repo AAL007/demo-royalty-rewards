@@ -33,25 +33,25 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
   return (
     <div className="flex flex-col h-full" style={{ background: '#F9F7EE' }}>
       {/* Header */}
-      <div style={{ padding: '20px 18px 16px', borderBottom: '3px solid #111111', background: '#F2D648', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ padding: '14px 16px', borderBottom: '3px solid #111111', background: '#F2D648', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
         <div>
-          <div style={{ fontWeight: 900, fontSize: 16, textTransform: 'uppercase', letterSpacing: -0.5, color: '#111111' }}>Notifications</div>
-          <div style={{ fontSize: 11, fontWeight: 700, marginTop: 2, color: '#111111' }}>{unreadCount} unread</div>
+          <div style={{ fontWeight: 900, fontSize: 15, textTransform: 'uppercase', letterSpacing: -0.5, color: '#111111', lineHeight: 1 }}>Notifications</div>
+          <div style={{ fontSize: 10, fontWeight: 700, marginTop: 3, color: 'rgba(0,0,0,0.55)' }}>{unreadCount} unread</div>
         </div>
-        <div className="flex gap-2 items-center">
+        <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexShrink: 0 }}>
           {unreadCount > 0 && (
             <button
               onClick={markAllRead}
-              style={{ fontSize: 10, fontWeight: 900, background: '#111111', color: '#F2D648', padding: '6px 10px', border: 'none', letterSpacing: 0.5, textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}
+              style={{ height: 30, fontSize: 9, fontWeight: 900, background: '#111111', color: '#F2D648', padding: '0 10px', border: 'none', letterSpacing: 0.5, textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}
             >
               Mark all read
             </button>
           )}
           <button
             onClick={onClose}
-            style={{ background: '#111111', padding: 7, display: 'flex', border: 'none', cursor: 'pointer' }}
+            style={{ height: 30, width: 30, background: '#111111', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', cursor: 'pointer', flexShrink: 0 }}
           >
-            <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="#F2D648" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#F2D648" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>

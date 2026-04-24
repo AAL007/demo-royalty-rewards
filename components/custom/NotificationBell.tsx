@@ -33,7 +33,7 @@ export function NotificationBell() {
       </button>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" className="w-80 p-0" style={{ background: '#F9F7EE', border: 'none' }}>
+        <SheetContent side="right" className="w-80 p-0" showCloseButton={false} style={{ background: '#F9F7EE', border: 'none' }}>
           <NotificationPanel onClose={() => setOpen(false)} />
         </SheetContent>
       </Sheet>

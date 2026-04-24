@@ -36,8 +36,8 @@ function MenuItemCard({ item }: { item: MenuItem }) {
   return (
     <div className="group relative bg-card rounded-2xl border border-border/60 shadow-card hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
       {item.popular && (
-        <div className="absolute top-3 left-3 z-10">
-          <Badge className="text-[10px] px-1.5 py-0.5 bg-amber-500 text-white border-0">Popular</Badge>
+        <div className="absolute top-2 left-2 z-10">
+          <Badge className="text-[9px] px-1 py-0 leading-4 h-4 bg-amber-500 text-white border-0 rounded-sm">Popular</Badge>
         </div>
       )}
 

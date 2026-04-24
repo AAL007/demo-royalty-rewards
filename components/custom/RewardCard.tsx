@@ -49,8 +49,8 @@ export function RewardCard({ reward }: RewardCardProps) {
         <div style={{ fontWeight: 900, fontSize: 13, color: '#111111', textTransform: 'uppercase', letterSpacing: -0.3, lineHeight: 1.2 }}>{reward.name}</div>
         <div style={{ fontSize: 11, color: '#6B6B6B', marginTop: 3, fontWeight: 500 }}>{reward.description}</div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto' }}>
-        <span style={{ background: canAfford ? '#F2D648' : '#EEEEEE', color: '#111111', fontSize: 11, fontWeight: 900, padding: '3px 9px', border: '2px solid #111111', textTransform: 'uppercase', letterSpacing: 0.5 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', gap: 6 }}>
+        <span style={{ background: canAfford ? '#F2D648' : '#EEEEEE', color: '#111111', fontSize: 10, fontWeight: 900, padding: '5px 8px', border: '2px solid #111111', textTransform: 'uppercase', letterSpacing: 0.3, whiteSpace: 'nowrap', flexShrink: 0, lineHeight: 1 }}>
           {reward.pointCost} pts
         </span>
         <button
@@ -60,19 +60,22 @@ export function RewardCard({ reward }: RewardCardProps) {
             color: canAfford ? '#F2D648' : '#FFFFFF',
             fontSize: 10,
             fontWeight: 900,
-            padding: '6px 13px',
+            padding: '5px 10px',
             cursor: canAfford ? 'pointer' : 'not-allowed',
-            letterSpacing: 1,
+            letterSpacing: 0.5,
             textTransform: 'uppercase',
             border: '2px solid #111111',
             fontFamily: 'inherit',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
+            lineHeight: 1,
           }}
         >
           {canAfford ? 'Redeem' : 'Need more'}
         </button>
       </div>
       {!canAfford && (
-        <div style={{ fontSize: 10, color: '#6B6B6B', fontWeight: 600, textAlign: 'center', marginTop: -4 }}>
+        <div style={{ fontSize: 10, color: '#6B6B6B', fontWeight: 600, textAlign: 'center', marginTop: 2 }}>
           Need {shortfall} more point{shortfall !== 1 ? 's' : ''}
         </div>
       )}
