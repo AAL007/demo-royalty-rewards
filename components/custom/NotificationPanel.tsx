@@ -1,11 +1,6 @@
 'use client'
 
 import { useApp } from '@/context/AppContext'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Button } from '@/components/ui/button'
-import { SheetHeader, SheetTitle } from '@/components/ui/sheet'
-import { Separator } from '@/components/ui/separator'
-import { cn } from '@/lib/utils'
 import type { Notification } from '@/lib/types'
 
 function relativeTime(iso: string): string {
@@ -36,75 +31,76 @@ export function NotificationPanel({ onClose }: NotificationPanelProps) {
   const { notifications, markRead, markAllRead, unreadCount } = useApp()
 
   return (
-    <div className="flex h-full flex-col">
-      <SheetHeader className="px-4 py-4 border-b">
-        <div className="flex items-center justify-between">
-          <SheetTitle className="text-base">
-            Notifications
-            {unreadCount > 0 && (
-              <span className="ml-2 text-xs font-normal text-muted-foreground">
-                ({unreadCount} unread)
-              </span>
-            )}
-          </SheetTitle>
+    <div className="flex flex-col h-full" style={{ background: '#F9F7EE' }}>
+      {/* Header */}
+      <div style={{ padding: '20px 18px 16px', borderBottom: '3px solid #111111', background: '#F2D648', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div>
+          <div style={{ fontWeight: 900, fontSize: 16, textTransform: 'uppercase', letterSpacing: -0.5, color: '#111111' }}>Notifications</div>
+          <div style={{ fontSize: 11, fontWeight: 700, marginTop: 2, color: '#111111' }}>{unreadCount} unread</div>
+        </div>
+        <div className="flex gap-2 items-center">
           {unreadCount > 0 && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-xs h-7"
+            <button
               onClick={markAllRead}
+              style={{ fontSize: 10, fontWeight: 900, background: '#111111', color: '#F2D648', padding: '6px 10px', border: 'none', letterSpacing: 0.5, textTransform: 'uppercase', cursor: 'pointer', fontFamily: 'inherit' }}
             >
               Mark all read
-            </Button>
+            </button>
           )}
+          <button
+            onClick={onClose}
+            style={{ background: '#111111', padding: 7, display: 'flex', border: 'none', cursor: 'pointer' }}
+          >
+            <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="#F2D648" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
         </div>
-      </SheetHeader>
+      </div>
 
-      <ScrollArea className="flex-1">
+      {/* Notification list */}
+      <div className="flex-1 overflow-y-auto" style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
         {notifications.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
-            <span className="text-4xl mb-3">🔔</span>
-            <p className="text-sm">No notifications yet</p>
+          <div style={{ textAlign: 'center', color: '#6B6B6B', marginTop: 40, fontSize: 12, fontWeight: 700, textTransform: 'uppercase' }}>
+            No notifications yet
           </div>
         ) : (
-          <div>
-            {notifications.map((notif, idx) => (
-              <div key={notif.id}>
-                <button
-                  onClick={() => {
-                    markRead(notif.id)
-                  }}
-                  className={cn(
-                    'w-full text-left px-4 py-4 hover:bg-muted/50 transition-colors flex gap-3 items-start',
-                    !notif.read && 'border-l-2 border-amber-500 bg-amber-50/50',
-                  )}
-                >
-                  <span className="text-lg shrink-0 mt-0.5">
-                    {TYPE_ICON[notif.type]}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <p className={cn('text-sm leading-snug', !notif.read && 'font-medium')}>
-                      {notif.message}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {relativeTime(notif.createdAt)}
-                    </p>
-                  </div>
-                  {!notif.read && (
-                    <span className="shrink-0 mt-1.5 h-2 w-2 rounded-full bg-amber-500" />
-                  )}
-                </button>
-                {idx < notifications.length - 1 && <Separator />}
+          notifications.map((n) => (
+            <button
+              key={n.id}
+              onClick={() => markRead(n.id)}
+              className="text-left w-full"
+              style={{
+                background: n.read ? '#FFFFFF' : '#F2D648',
+                border: '2px solid #111111',
+                padding: '12px 14px',
+                cursor: 'pointer',
+                boxShadow: n.read ? 'none' : '3px 3px 0 #111111',
+                fontFamily: 'inherit',
+                display: 'flex',
+                gap: 10,
+                alignItems: 'flex-start',
+              }}
+            >
+              <span style={{ fontSize: 18, flexShrink: 0, marginTop: 1 }}>{TYPE_ICON[n.type]}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 12, fontWeight: n.read ? 600 : 800, color: '#111111', lineHeight: 1.4 }}>{n.message}</div>
+                <div style={{ fontSize: 10, color: '#6B6B6B', marginTop: 5, fontWeight: 600 }}>{relativeTime(n.createdAt)}</div>
               </div>
-            ))}
-          </div>
+              {!n.read && <span style={{ width: 8, height: 8, background: '#111111', borderRadius: '50%', flexShrink: 0, marginTop: 4 }} />}
+            </button>
+          ))
         )}
-      </ScrollArea>
+      </div>
 
-      <div className="p-4 border-t">
-        <Button variant="outline" className="w-full" onClick={onClose}>
+      {/* Footer */}
+      <div style={{ padding: '14px 16px', borderTop: '2px solid #111111' }}>
+        <button
+          onClick={onClose}
+          style={{ width: '100%', padding: '11px', background: '#111111', color: '#F2D648', fontWeight: 900, fontSize: 12, textTransform: 'uppercase', letterSpacing: 1, border: '2px solid #111111', cursor: 'pointer', fontFamily: 'inherit' }}
+        >
           Close
-        </Button>
+        </button>
       </div>
     </div>
   )

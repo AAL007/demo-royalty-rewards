@@ -1,6 +1,3 @@
-import { Card, CardContent } from '@/components/ui/card'
-import { TrendingUp, TrendingDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import type { ReactNode } from 'react'
 
 interface StatCardProps {
@@ -11,30 +8,26 @@ interface StatCardProps {
   accent?: string
 }
 
-export function StatCard({ label, value, trend, icon, accent = '#f59e0b' }: StatCardProps) {
+export function StatCard({ label, value, trend, icon }: StatCardProps) {
   return (
-    <Card className="shadow-card border-border/60 overflow-hidden">
-      <div className="h-0.5 w-full" style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }} />
-      <CardContent className="p-5">
-        <div className="flex items-start justify-between">
-          <div>
-            <p className="text-muted-foreground text-xs font-medium uppercase tracking-wider">{label}</p>
-            <p className="text-3xl font-bold mt-2 tracking-tight">{value}</p>
-            {trend !== undefined && (
-              <div className={cn('flex items-center gap-1 text-xs mt-2', trend >= 0 ? 'text-emerald-600' : 'text-red-500')}>
-                {trend >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
-                <span>{Math.abs(trend)}% from last period</span>
-              </div>
-            )}
-          </div>
-          {icon && (
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl"
-              style={{ background: `${accent}18` }}>
-              <span style={{ color: accent }}>{icon}</span>
-            </div>
-          )}
+    <div
+      style={{
+        background: '#F2D648',
+        border: '2px solid rgba(255,255,255,0.15)',
+        padding: '18px 18px',
+        boxShadow: '0 0 0 2px rgba(255,255,255,0.05)',
+      }}
+    >
+      <div className="flex justify-between items-start" style={{ marginBottom: 10 }}>
+        <div style={{ fontSize: 9, fontWeight: 900, color: 'rgba(0,0,0,0.5)', letterSpacing: 2, textTransform: 'uppercase' }}>{label}</div>
+        <div style={{ fontSize: 20 }}>{icon}</div>
+      </div>
+      <div style={{ fontSize: 34, fontWeight: 900, color: '#111111', letterSpacing: -1, lineHeight: 1 }}>{value}</div>
+      {trend !== undefined && (
+        <div style={{ fontSize: 10, fontWeight: 700, color: trend >= 0 ? '#27AE60' : '#C0392B', marginTop: 4 }}>
+          {trend >= 0 ? '↑' : '↓'} {Math.abs(trend)}% from last period
         </div>
-      </CardContent>
-    </Card>
+      )}
+    </div>
   )
 }

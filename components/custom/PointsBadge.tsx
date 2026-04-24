@@ -1,5 +1,3 @@
-import { Zap } from 'lucide-react'
-
 interface PointsBadgeProps {
   points: number
 }
@@ -7,29 +5,33 @@ interface PointsBadgeProps {
 export function PointsBadge({ points }: PointsBadgeProps) {
   return (
     <div
-      className="relative overflow-hidden rounded-2xl p-6 shadow-card-lg h-full"
-      style={{ background: 'linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%)' }}
+      style={{
+        background: '#111111',
+        border: '3px solid #111111',
+        borderRadius: 4,
+        padding: '20px 16px',
+        boxShadow: '5px 5px 0 #111111',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+      }}
     >
-      {/* Subtle shine */}
-      <div
-        className="absolute top-0 left-0 right-0 h-1/2 opacity-20"
-        style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.4), transparent)' }}
-      />
-
-      <div className="relative flex flex-col h-full">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-950/20">
-            <Zap className="h-4 w-4 text-amber-950/80" />
-          </div>
-          <span className="text-amber-950/70 text-xs font-semibold uppercase tracking-widest">
-            Points Balance
-          </span>
+      <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 9, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 8 }}>
+        Points Balance
+      </div>
+      <div style={{ color: '#F2D648', fontWeight: 900, fontSize: 48, letterSpacing: -2, lineHeight: 1 }}>
+        {points}
+      </div>
+      <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginTop: 6 }}>
+        Available to redeem
+      </div>
+      <div style={{ marginTop: 'auto', paddingTop: 16 }}>
+        <div style={{ height: 3, background: 'rgba(255,255,255,0.08)', borderRadius: 2, overflow: 'hidden' }}>
+          <div style={{ height: '100%', width: `${Math.min((points / 200) * 100, 100)}%`, background: '#F2D648', borderRadius: 2, transition: 'width 0.5s ease' }} />
         </div>
-
-        <p className="text-amber-950 text-5xl font-bold tracking-tight leading-none">
-          {points}
-        </p>
-        <p className="text-amber-950/50 text-sm mt-2">available to redeem</p>
+        <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)', fontWeight: 700, marginTop: 4, textTransform: 'uppercase', letterSpacing: 1 }}>
+          {points < 200 ? `${200 - points} pts to next tier` : 'Max tier reached'}
+        </div>
       </div>
     </div>
   )

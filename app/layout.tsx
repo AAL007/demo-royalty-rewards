@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Montserrat, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { AppProvider } from '@/context/AppContext'
 import { CartProvider } from '@/context/CartContext'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { Toaster } from '@/components/ui/sonner'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const montserrat = Montserrat({
+  variable: '--font-montserrat',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
 })
 
 const geistMono = Geist_Mono({
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Brew & Earn — Coffee Loyalty',
+  title: 'Kopi XYZ — Loyalty Rewards',
   description: 'Earn stamps, collect points, enjoy free drinks.',
 }
 
@@ -29,14 +30,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <AppProvider>
           <CartProvider>
             <TooltipProvider delay={200}>
               {children}
-              <Toaster richColors position="bottom-right" />
+              <Toaster richColors position="top-right" />
             </TooltipProvider>
           </CartProvider>
         </AppProvider>
