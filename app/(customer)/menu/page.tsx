@@ -34,7 +34,7 @@ function MenuItemCard({ item }: { item: MenuItem }) {
   }
 
   return (
-    <div className="group relative bg-card rounded-2xl border border-border/60 shadow-card hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
+    <div className="group relative bg-card rounded-2xl border border-border/60 shadow-card hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden flex flex-col">
       {item.popular && (
         <div className="absolute top-2 left-2 z-10">
           <Badge className="text-[9px] px-1 py-0 leading-4 h-4 bg-amber-500 text-white border-0 rounded-sm">Popular</Badge>
@@ -53,13 +53,13 @@ function MenuItemCard({ item }: { item: MenuItem }) {
         {item.icon}
       </div>
 
-      <div className="p-4 space-y-3">
-        <div>
+      <div className="p-4 flex flex-col flex-1">
+        <div className="flex-1">
           <h3 className="font-semibold text-sm leading-tight">{item.name}</h3>
           <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{item.description}</p>
         </div>
 
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-2 mt-3">
           <span className="font-bold text-base">${item.price.toFixed(2)}</span>
           <Button
             size="sm"
